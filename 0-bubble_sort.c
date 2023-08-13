@@ -18,7 +18,7 @@ void bubble_sort(int *array, size_t size)
 
 	if (array == NULL)
 	{
-		fprintf(stderr, NULL);
+		fprintf(stderr, "");
 		exit(-1);
 	}
 
