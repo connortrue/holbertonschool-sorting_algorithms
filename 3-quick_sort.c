@@ -1,41 +1,36 @@
-#include "sort.h"
-void swap(listint_t *a, listint_t *b) {
-    int temp = a->n;
-    a->n = b->n;
-    b->n = temp;
-}
+int partition(int *array, int low, int high) {
+    int pivot = array[high]; // Pivot element is the last element
+    int i = low - 1; // Index of smaller element
 
-listint_t *partition(listint_t *low, listint_t *high) {
-    int pivot = high->n;
-    listint_t *i = low->prev;
-
-    for (listint_t *j = low; j != high; j = j->next) {
-        if (j->n <= pivot) {
-            i = (i == NULL) ? low : i->next;
-            swap(i, j);
+    for (int j = low; j <= high - 1; j++) {
+        if (array[j] <= pivot) {
+            i++;
+            // Swap the elements
+            int temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+            // Print the array after each swap
+            print_array(array, high - low + 1);
         }
     }
-    i = (i == NULL) ? low : i->next;
-    swap(i, high);
-    return i;
+    // Swap the pivot element with the element at i+1
+    int temp = array[i + 1];
+    array[i + 1] = array[high];
+    array[high] = temp;
+    // Print the array after each swap
+    print_array(array, high - low + 1);
+
+    return i + 1; // Return the index of the pivot element
 }
 
-void quick_sort(listint_t *low, listint_t *high) {
-    if (low != NULL && high != NULL && low != high && low != high->next) {
-        listint_t *pivot = partition(low, high);
-        quick_sort(low, pivot->prev);
-        quick_sort(pivot->next, high);
+void quick_sort(int *array, size_t size) {
+    if (size <= 1) {
+        return; // Base case: array with 0 or 1 element is already sorted
     }
-}
 
-void print_list(const listint_t *list) {
-    while (list != NULL) {
-        printf("%d", list->n);
-        if (list->next != NULL) {
-            printf(", ");
-        }
-        list = list->next;
-    }
-    printf("\n");
-}
+    int pivot_index = partition(array, 0, size - 1);
 
+    // Recursively sort the sub-arrays before and after the pivot
+    quick_sort(array, pivot_index);
+    quick_sort(array + pivot_index + 1, size - pivot_index - 1);
+}
