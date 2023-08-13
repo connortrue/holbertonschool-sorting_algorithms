@@ -1,7 +1,7 @@
 #include "sort.h"
 int partition(int *array, int low, int high) {
     int pivot = array[high]; /* Pivot element is the last element */
-    int i, j;
+    int i, j, temp;
     
     i = low - 1; /* Index of smaller element */
 
@@ -9,7 +9,7 @@ int partition(int *array, int low, int high) {
         if (array[j] <= pivot) {
             i++;
             /* Swap the elements */
-            int temp = array[i];
+            temp = array[i];
             array[i] = array[j];
             array[j] = temp;
             /* Print the array after each swap */
@@ -17,7 +17,7 @@ int partition(int *array, int low, int high) {
         }
     }
     /* Swap the pivot element with the element at i+1 */
-    int temp = array[i + 1];
+    temp = array[i + 1];
     array[i + 1] = array[high];
     array[high] = temp;
     /* Print the array after each swap */
@@ -31,7 +31,9 @@ void quick_sort(int *array, size_t size) {
         return; /* Base case: array with 0 or 1 element is already sorted */
     }
 
-    int pivot_index = partition(array, 0, size - 1);
+    int pivot_index;
+
+    pivot_index = partition(array, 0, size - 1);
 
     /* Recursively sort the sub-arrays before and after the pivot */
     quick_sort(array, pivot_index);
