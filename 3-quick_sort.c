@@ -26,12 +26,14 @@ int partition(int *array, int low, int high) {
     return i + 1; /* Return the index of the pivot element */
 }
 
-void quick_sort(int *array, size_t size) {
-    if (size <= 1) {
+void quick_sort(int *array, size_t size)
+{
+	int pivot_index;
+
+    if (size <= 1)
+    {
         return; /* Base case: array with 0 or 1 element is already sorted */
     }
-
-    int pivot_index;
 
     pivot_index = partition(array, 0, size - 1);
 
