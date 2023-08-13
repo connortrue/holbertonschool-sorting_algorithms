@@ -12,16 +12,12 @@ int partition(int *array, int low, int high) {
             temp = array[i];
             array[i] = array[j];
             array[j] = temp;
-            /* Print the array after each swap */
-            print_array(array, high - low + 1);
         }
     }
     /* Swap the pivot element with the element at i+1 */
     temp = array[i + 1];
     array[i + 1] = array[high];
     array[high] = temp;
-    /* Print the array after each swap */
-    print_array(array, high - low + 1);
 
     return i + 1; /* Return the index of the pivot element */
 }
@@ -36,7 +32,7 @@ void quick_sort(int *array, size_t size)
     }
 
     pivot_index = partition(array, 0, size - 1);
-
+    print_array(array, pivot_index);
     /* Recursively sort the sub-arrays before and after the pivot */
     quick_sort(array, pivot_index);
     quick_sort(array + pivot_index + 1, size - pivot_index - 1);
