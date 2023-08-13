@@ -23,6 +23,8 @@ void swap(int *a, int *b)
  * partitions the array such that all elements smaller than or equal to the
  * pivot are placed before it, and all elements greater than the pivot are
  * placed after it. It returns the index of the pivot after partitioning.
+ *
+ * Return: The index of the pivot after partitioning.
  */
 int partition(int *array, int low, int high)
 {
