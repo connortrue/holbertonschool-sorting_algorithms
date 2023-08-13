@@ -1,54 +1,41 @@
 #include "sort.h"
-#include <stdio.h>
-
-void swap(int *a, int *b)
-{
-	int temp = *a;
-
-	*a = *b;
-	*b = temp;
+void swap(listint_t *a, listint_t *b) {
+    int temp = a->n;
+    a->n = b->n;
+    b->n = temp;
 }
 
-int partition(int array[], int low, int high)
-{
-	int pivot = array[high];
-	int i = low - 1;
-	int j;
+listint_t *partition(listint_t *low, listint_t *high) {
+    int pivot = high->n;
+    listint_t *i = low->prev;
 
-	for (j = low; j <= high - 1; j++)
-	{
-		if (array[j] <= pivot)
-		{
-			i++;
-			swap(&array[i], &array[j]);
-		}
-	}
-	swap(&array[i + 1], &array[high]);
-	return (i + 1);
+    for (listint_t *j = low; j != high; j = j->next) {
+        if (j->n <= pivot) {
+            i = (i == NULL) ? low : i->next;
+            swap(i, j);
+        }
+    }
+    i = (i == NULL) ? low : i->next;
+    swap(i, high);
+    return i;
 }
 
-void quick_sort(int array[], int low, int high)
-{
-	if (low < high)
-	{
-		int pivot = partition(array, low, high);
-
-		quick_sort(array, low, pivot - 1);
-		quick_sort(array, pivot + 1, high);
-	}
+void quick_sort(listint_t *low, listint_t *high) {
+    if (low != NULL && high != NULL && low != high && low != high->next) {
+        listint_t *pivot = partition(low, high);
+        quick_sort(low, pivot->prev);
+        quick_sort(pivot->next, high);
+    }
 }
 
-void print_array(int array[], unsigned int size)
-{
-	unsigned int i;
-
-	for (i = 0; i < size; i++)
-	{
-		printf("%d", array[i]);
-		if (i != size - 1)
-		{
-			printf(", ");
-		}
-	}
-	printf("\n");
+void print_list(const listint_t *list) {
+    while (list != NULL) {
+        printf("%d", list->n);
+        if (list->next != NULL) {
+            printf(", ");
+        }
+        list = list->next;
+    }
+    printf("\n");
 }
+
