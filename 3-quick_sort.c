@@ -31,9 +31,10 @@ void swap(int *a, int *b)
 int partition(int *array, int low, int high)
 {
 	int pivot = array[high]; /* Choose the last element as the pivot */
-	int j, i = low - 1;
+	int j;
+	int i = low - 1;
 
-	for (int j = low; j <= high - 1; j++)
+	for (j = low; j <= high - 1; j++)
 	{
 		if (array[j] <= pivot)
 		{
