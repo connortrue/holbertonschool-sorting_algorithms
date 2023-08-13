@@ -1,3 +1,5 @@
+#include "sort.h"
+
 /**
  * swap - Swaps two elements in an array.
  * @a: Pointer to the first element.
