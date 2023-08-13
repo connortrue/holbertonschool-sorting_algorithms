@@ -1,39 +1,52 @@
 #include "sort.h"
+#include <stdio.h>
 
-void swap(int* a, int* b) {
+void swap(int *a, int *b)
+{
 	int temp = *a;
+
 	*a = *b;
 	*b = temp;
 }
 
-int partition(int array[], int low, int high) {
-	int pivot = arr[high];
+int partition(int array[], int low, int high)
+{
+	int pivot = array[high];
 	int i = low - 1;
 	int j;
 
-	for (j = low; j <= high - 1; j++) {
-		if (arr[j] <= pivot) {
+	for (j = low; j <= high - 1; j++)
+	{
+		if (array[j] <= pivot)
+		{
 			i++;
-			swap(&arr[i], &arr[j]);
+			swap(&array[i], &array[j]);
 		}
 	}
-	swap(&arr[i + 1], &arr[high]);
+	swap(&array[i + 1], &array[high]);
 	return (i + 1);
 }
 
-void quick_sort(int array[], int low, int high) {
-	if (low < high) {
-		int pivot = partition(arr, low, high);
-		quick_sort(arr, low, pivot - 1);
-		quick_sort(arr, pivot + 1, high);
+void quick_sort(int array[], int low, int high)
+{
+	if (low < high)
+	{
+		int pivot = partition(array, low, high);
+
+		quick_sort(array, low, pivot - 1);
+		quick_sort(array, pivot + 1, high);
 	}
 }
 
-void print_array(int array[], unsigned int size) {
+void print_array(int array[], unsigned int size)
+{
 	unsigned int i;
-	for (i = 0; i < size; i++) {
-		printf("%d", arr[i]);
-		if (i != size - 1) {
+
+	for (i = 0; i < size; i++)
+	{
+		printf("%d", array[i]);
+		if (i != size - 1)
+		{
 			printf(", ");
 		}
 	}
