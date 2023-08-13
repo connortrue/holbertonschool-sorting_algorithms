@@ -17,10 +17,7 @@ void bubble_sort(int *array, size_t size)
 	int temp;
 
 	if (array == NULL)
-	{
-		fprintf(stderr, "Error: NULL array given\n");
 		exit(-1);
-	}
 
 	for (i = 0; i < size - 1; i++)
 	{
