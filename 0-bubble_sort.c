@@ -16,7 +16,7 @@ void bubble_sort(int *array, size_t size)
 	size_t i, j;
 	int temp;
 
-	if (array == NULL)
+	if (array == NULL || *array == NULL)
 	{
 		perror("Error: array is NULL");
 		return;
