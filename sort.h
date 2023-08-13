@@ -22,9 +22,9 @@ void print_list(const listint_t *list);
 void bubble_sort(int *array, size_t size);
 void insertion_sort_list(listint_t **list);
 void selection_sort(int *array, size_t size);
-void quick_sort(int *array, size_t size);
-void quick_sort_helper(int *array, int low, int high);
-int partition(int *array, int low, int high);
-void swap(int *a, int *b);
+void swap(listint_t *a, listint_t *b);
+listint_t *partition(listint_t *low, listint_t *high);
+void quick_sort(listint_t *low, listint_t *high);
+void print_list(const listint_t *list);
 
 #endif /* SORT_H */
