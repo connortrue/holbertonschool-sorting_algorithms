@@ -18,7 +18,6 @@ int lomuto_partition(int *array, int low, int high)
 		{
 			i++;
 			swap(&array[i], &array[j]);
-			printf("Swapped: %d, %d\n", array[i], array[j]);
 			print_array(array, high + 1);
 		}
 	}
