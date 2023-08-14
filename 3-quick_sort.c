@@ -1,39 +1,58 @@
 #include "sort.h"
-int partition(int *array, int low, int high) {
-    int pivot = array[high]; /* Pivot element is the last element */
-    int i, j, temp;
-    
-    i = low - 1; /* Index of smaller element */
 
-    for (j = low; j <= high - 1; j++) {
-        if (array[j] <= pivot) {
-            i++;
-            /* Swap the elements */
-            temp = array[i];
-            array[i] = array[j];
-            array[j] = temp;
-        }
-    }
-    /* Swap the pivot element with the element at i+1 */
-    temp = array[i + 1];
-    array[i + 1] = array[high];
-    array[high] = temp;
+void swap(int *a, int *b)
+{
+	int temp = *a;
+	*a = *b;
+	*b = temp;
+}
 
-    return i + 1; /* Return the index of the pivot element */
+int lomuto_partition(int *array, int low, int high)
+{
+	int pivot = array[high];
+	int i = low - 1;
+
+	for (int j = low; j <= high - 1; j++)
+	{
+		if (array[j] <= pivot)
+		{
+			i++;
+			swap(&array[i], &array[j]);
+			printf("Swapped: %d, %d\n", array[i], array[j]);
+			print_array(array, high + 1);
+		}
+	}
+	swap(&array[i + 1], &array[high]);
+	print_array(array, high + 1);
+
+	return (i + 1);
 }
 
 void quick_sort(int *array, size_t size)
 {
-	int pivot_index;
+	int stack[size];
+	int top = -1;
 
-    if (size <= 1)
-    {
-        return; /* Base case: array with 0 or 1 element is already sorted */
-    }
+	stack[++top] = 0;
+	stack[++top] = size - 1;
 
-    pivot_index = partition(array, 0, size - 1);
-    print_array(array, pivot_index);
-    /* Recursively sort the sub-arrays before and after the pivot */
-    quick_sort(array, pivot_index);
-    quick_sort(array + pivot_index + 1, size - pivot_index - 1);
+	while (top >= 0)
+	{
+		int high = stack[top--];
+		int low = stack[top--];
+
+		int pivot_index = lomuto_partition(array, low, high);
+
+		if (pivot_index - 1 > low)
+		{
+			stack[++top] = low;
+			stack[++top] = pivot_index - 1;
+		}
+
+		if (pivot_index + 1 < high)
+		{
+			stack[++top] = pivot_index + 1;
+			stack[++top] = high;
+		}
+	}
 }
