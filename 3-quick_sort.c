@@ -10,7 +10,19 @@ void swap(int *a, int *b)
 int lomuto_partition(int *array, int low, int high)
 {
 	int pivot = array[high];
-	int j, i = low - 1;
+	int j,k = low, i = low - 1;
+	int sorted = 1;
+
+	for (k = low; k < high; k++)
+	{
+		if (array[k] > array[k + 1])
+		{
+			sorted = 0;
+			break;
+		}
+	}
+	if (sorted)
+		return high;
 
 	for (j = low; j <= high - 1; j++)
 	{
@@ -59,16 +71,4 @@ void quick_sort(int *array, size_t size)
 			stack[++top] = high;
 		}
 	}
-
-	for (i = 1; i < size; i++)
-	{
-		if (array[i] < array[i - 1])
-		{
-			sorted = 0;
-			break;
-		}
-	}
-
-	if (sorted) 
-		return;
 }
