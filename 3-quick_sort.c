@@ -60,8 +60,7 @@ void quick_sort(int *array, size_t size)
 		}
 	}
 
-	int sorted = 1;
-	for (size_t i = 1; i < size; i++)
+	for (i = 1; i < size; i++)
 	{
 		if (array[i] < array[i - 1])
 		{
