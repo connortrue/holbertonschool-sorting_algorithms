@@ -32,6 +32,9 @@ void quick_sort(int *array, size_t size)
 	int stack[MAX_STACK_SIZE];
 	int top = -1;
 
+	if (array == NULL || size <= 1)
+		return;
+
 	stack[++top] = 0;
 	stack[++top] = size - 1;
 
