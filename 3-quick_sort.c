@@ -1,5 +1,5 @@
 #include "sort.h"
-
+#define MAX_STACK_SIZE 100
 void swap(int *a, int *b)
 {
 	int temp = *a;
@@ -30,7 +30,7 @@ int lomuto_partition(int *array, int low, int high)
 
 void quick_sort(int *array, size_t size)
 {
-	int stack[size];
+	int stack[MAX_STACK_SIZE];
 	int top = -1;
 
 	stack[++top] = 0;
