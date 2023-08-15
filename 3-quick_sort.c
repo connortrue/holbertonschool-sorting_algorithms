@@ -46,7 +46,7 @@ int lomuto_partition(int *array, int low, int high)
 		{
 			i++;
 			swap(&array[i], &array[j]);
-			print_array(array, high + 1);
+			print_array(array, low);
 		}
 	}
 	swap(&array[i + 1], &array[high]);
